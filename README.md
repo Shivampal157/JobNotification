@@ -1,135 +1,237 @@
-# Job Notification Platform
+<div align="center">
 
-A full-stack platform for college job notifications, built with **Node.js/Express** (backend) and **React + Vite** (frontend).
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=32&duration=3000&pause=1000&color=2563EB&center=true&vCenter=true&width=600&lines=Job+Notification+Platform;College+Placement+Portal;Stay+Ahead+in+Placements!" alt="Typing SVG" />
 
-**GitHub Repo:** [https://github.com/tictac1213/JobNotification.git](https://github.com/tictac1213/JobNotification.git)
+<br/>
 
----
+![GitHub repo size](https://img.shields.io/github/repo-size/Shivampal157/JobNotification?color=2563eb&style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/Shivampal157/JobNotification?color=16a34a&style=for-the-badge)
+![GitHub stars](https://img.shields.io/github/stars/Shivampal157/JobNotification?color=f59e0b&style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/Shivampal157/JobNotification?color=8b5cf6&style=for-the-badge)
 
-## Features
-- JWT authentication (student/admin)
-- Admin approval workflow for students
-- Company, announcement, and task management
-- Email notifications (Mailjet, first 100 students)
-- Responsive React frontend with protected routes
+<br/>
 
----
+> 🎓 A full-stack **College Job Notification Platform** that keeps students informed about placement opportunities, deadlines, and company visits — in real time.
 
-## Prerequisites
-- Node.js (v16+ recommended)
-- MongoDB (Atlas or local)
-- Mailjet account (free tier is sufficient)
-- (Optional for production) Custom domain for best email deliverability
+</div>
 
 ---
 
-## 1. Backend Setup
+## ✨ Features
 
-### A. Clone and Install
+### 👨‍🎓 Student Panel
+- 📋 Register with academic details (Branch, CGPA, Year, Scholar No.)
+- 🏢 View **eligible companies** based on profile
+- 📢 Read **announcements** from admin
+- ✅ Track **pending tasks** and deadlines
+- 📧 Get **email notifications** for new jobs & reminders
+- 👤 Update personal profile
+
+### 🛡️ Admin Panel
+- 👥 Approve/Reject student registrations
+- 🏢 Add & manage companies with eligibility criteria
+- 📢 Post announcements
+- 📝 Assign tasks with deadlines to students
+- 📊 View all registered students
+
+### ⚙️ System
+- 🔐 JWT-based Authentication
+- ⏰ Automated email reminders (1 day & 6 hours before deadline)
+- 🌐 Role-based access control (Student / Admin)
+- ☁️ MongoDB Atlas cloud database
+
+---
+
+## 🛠️ Tech Stack
+
+<div align="center">
+
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | React 18, Vite, TailwindCSS, React Router v6 |
+| **Backend** | Node.js, Express.js 5 |
+| **Database** | MongoDB Atlas (Mongoose ODM) |
+| **Auth** | JWT (JSON Web Tokens), bcryptjs |
+| **Email** | Nodemailer + Mailjet |
+| **Scheduling** | node-cron |
+| **HTTP Client** | Axios |
+| **UI Components** | Lucide React, React Hot Toast |
+| **Forms** | React Hook Form |
+
+</div>
+
+---
+
+## 📁 Project Structure
+
+```
+JobNotification/
+│
+├── 📂 Backend/
+│   ├── 📂 config/          # Database connection
+│   ├── 📂 controllers/     # Route logic (auth, company, task, admin...)
+│   ├── 📂 middleware/       # JWT auth middleware
+│   ├── 📂 models/          # Mongoose schemas
+│   ├── 📂 routes/          # Express routes
+│   ├── 📂 utils/           # Email service, scheduler, helpers
+│   ├── 📂 validators/      # Input validation
+│   └── server.js           # Entry point
+│
+└── 📂 FrontEnd/
+    ├── 📂 src/
+    │   ├── 📂 components/  # Reusable UI components
+    │   ├── 📂 pages/       # Route-level pages
+    │   ├── 📂 context/     # Auth context (global state)
+    │   └── 📂 utils/       # API helper, eligibility logic
+    └── index.html
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js v18+
+- MongoDB Atlas account (free)
+- Mailjet account (free)
+
+---
+
+### 1️⃣ Clone the Repository
+
 ```bash
-git clone https://github.com/tictac1213/JobNotification.git
-cd JobNotification/Backend
+git clone https://github.com/Shivampal157/JobNotification.git
+cd JobNotification
+```
+
+---
+
+### 2️⃣ Backend Setup
+
+```bash
+cd Backend
 npm install
 ```
 
-### B. Environment Variables
-Create a `.env` file in `Backend/`:
-```
-PORT=5000
-MONGODB_URI=your_mongodb_connection_string
+Create a `.env` file in the `Backend/` folder:
+
+```env
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/jobnotification
 JWT_SECRET=your_super_secret_key
-
-MAILJET_API_KEY=your-mailjet-api-key
-MAILJET_SECRET_KEY=your-mailjet-secret-key
-MAILJET_FROM=your_verified_gmail_address@gmail.com
+PORT=5000
+MAILJET_API_KEY=your_mailjet_api_key
+MAILJET_SECRET_KEY=your_mailjet_secret_key
+MAILJET_FROM=your_verified_email@example.com
+FRONTEND_URL=http://localhost:5173
 ```
-- Get Mailjet API keys from [Mailjet dashboard](https://app.mailjet.com/account/api_keys).
-- Add your Gmail address as a sender in Mailjet and verify it.
 
-### C. Seed Courses
+Seed initial data:
+
 ```bash
+# Seed courses (BTech, MTech, MCA)
 node utils/seedCourses.js
+
+# Create admin account
+node createAdmin.js
 ```
 
-### D. Start Backend
-**Development:**
+Start backend:
+
 ```bash
-npm run dev
+node server.js
 ```
-**Production:**
-```bash
-NODE_ENV=production npm start
-```
+
+✅ Backend running at `http://localhost:5000`
 
 ---
 
-## 2. Frontend Setup
+### 3️⃣ Frontend Setup
 
-### A. Install
 ```bash
-cd ../FrontEnd
+cd FrontEnd
 npm install
 ```
 
-### B. Environment Variables
-If you need to set API base URLs, create a `.env` file in `FrontEnd/` (optional for Vite):
-```
+Create a `.env` file in the `FrontEnd/` folder:
+
+```env
 VITE_API_URL=http://localhost:5000/api
 ```
 
-### C. Run Frontend
-**Development:**
+Start frontend:
+
 ```bash
 npm run dev
 ```
-**Production Build:**
-```bash
-npm run build
-```
-- The production build will be in the `dist/` folder.
+
+✅ Frontend running at `http://localhost:5173`
 
 ---
 
-## 3. Email Notification Logic
-- Only the **first 100 registered students** (across all years) will receive emails.
-- All emails are sent via Mailjet using the sender address you verified.
-- Admins are not included in student email notifications unless they are among the first 100 students.
+### 4️⃣ Login
+
+| Role | Email | Password |
+|------|-------|----------|
+| **Admin** | `admin@jobnotify.com` | `Admin@1234` |
+| **Student** | Register → wait for admin approval | - |
 
 ---
 
-## 4. Deployment
+## 🔗 API Endpoints
 
-### A. Deploy Backend
-- Deploy to any Node.js hosting (Render, Railway, Heroku, DigitalOcean, AWS, etc.).
-- Set all environment variables in your host's dashboard.
-- Use a process manager like PM2 for reliability.
-
-### B. Deploy Frontend
-- Deploy the `dist/` folder to any static hosting (Vercel, Netlify, Render, Surge, etc.).
-- Set the API URL in your frontend to point to your deployed backend.
-
----
-
-## 5. Testing Email Delivery
-To test email delivery to the first 100 students:
-```bash
-cd Backend
-node test-email.js
-```
-- Check your Mailjet dashboard for delivery status.
-- Emails may go to spam if using a Gmail sender; for best results, use a custom domain.
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| `POST` | `/api/auth/signup` | Register student | ❌ |
+| `POST` | `/api/auth/login` | Login | ❌ |
+| `GET` | `/api/auth/me` | Get current user | ✅ |
+| `GET` | `/api/companies` | List all companies | ✅ |
+| `POST` | `/api/companies` | Add company | 🛡️ Admin |
+| `GET` | `/api/announcements` | List announcements | ✅ |
+| `POST` | `/api/announcements` | Create announcement | 🛡️ Admin |
+| `GET` | `/api/tasks` | List tasks | ✅ |
+| `POST` | `/api/tasks` | Create task | 🛡️ Admin |
+| `GET` | `/api/admin/students` | All students | 🛡️ Admin |
+| `PATCH` | `/api/admin/approve/:id` | Approve student | 🛡️ Admin |
 
 ---
 
-## 6. Security & Best Practices
-- Never commit `.env` files to your repository.
-- Use strong secrets and secure your MongoDB.
-- For production, use HTTPS and a custom domain for best email deliverability.
+## 📧 Email Notifications
+
+The platform automatically sends emails for:
+
+| Event | Trigger |
+|-------|---------|
+| 🏢 New Company Added | Eligible students notified |
+| ✅ Account Approved | Student gets welcome email |
+| ⏰ Task Deadline (1 day) | Automated reminder |
+| 🚨 Task Deadline (6 hours) | Urgent reminder |
+
+> Powered by **Mailjet** via Nodemailer. Free plan supports 200 emails/day.
 
 ---
 
-## 7. Support
-If you need help with deployment or Mailjet setup, check:
-- [Mailjet Docs](https://dev.mailjet.com/)
-- [Vercel Docs](https://vercel.com/docs)
-- [Render Docs](https://render.com/docs)
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to:
+
+1. 🍴 Fork the repo
+2. 🌿 Create a new branch (`git checkout -b feature/amazing-feature`)
+3. 💾 Commit your changes (`git commit -m 'Add amazing feature'`)
+4. 📤 Push to the branch (`git push origin feature/amazing-feature`)
+5. 🔃 Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+<div align="center">
+
+Made with ❤️ by [Shivam Pal](https://github.com/Shivampal157)
+
+⭐ **Star this repo if you found it helpful!** ⭐
+
+</div>
